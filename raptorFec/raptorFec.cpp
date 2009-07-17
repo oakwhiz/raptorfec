@@ -1,8 +1,9 @@
 
+#include "defines.h"
 #include "triple_generator.h"
 #include <stdio.h>
 
-int main(int argc, char* argv[])
+int test_triple_generator(void)
 {
 	CTripleGenerator gen;
 	int k = 1024;
@@ -14,3 +15,9 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
+
+int main(int argc, char* argv[])
+{
+	test_triple_generator();
+	return 0;
+}

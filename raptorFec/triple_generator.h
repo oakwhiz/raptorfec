@@ -28,29 +28,12 @@ struct CTriple
 
 class CTripleGenerator
 {
-public:
-
-
 private:
 	
 	static const u32 m_Q = 65521;
 	u32 m_K;
 	u32 m_L;
 	
-
-private:
-
-	inline double Fact(u32 n);
-	inline u32    Comb(u32 n, u32 k);
-	inline bool   IsPrime(u32 num);
-
-	/* See RFC 5053:5.4.4.1*/
-	inline u32    Rand(u32 X, u32 i, u32 m);
-	/* See RFC 5053:5.4.4.2*/
-	inline u32    Deg(u32 v);
-	/* See RFC 5053:5.4.2.3*/
-	inline u32    GetL(u32 K);
-
 public:
 
 	/* See RFC 5053:5.4.4.4 */
