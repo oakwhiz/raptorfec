@@ -19,15 +19,22 @@
 
 #include "types.h"
 
+#define MIN(x,y) ((x<y)?x:y)
+
 double Fact(u32 n);
 u32    Comb(u32 n, u32 k);
 bool   IsPrime(u32 num);
+u32    NonZeroBits(u32 num);
+bool   IsBitSet(u32 num, u32 pos);
 
 /* See RFC 5053:5.4.4.1*/
 u32    Rand(u32 X, u32 i, u32 m);
 /* See RFC 5053:5.4.4.2*/
 u32    Deg(u32 v);
 /* See RFC 5053:5.4.2.3*/
+u32    GetX(u32 K);
+u32    GetS(u32 K);
+u32    GetH(u32 K, u32 S);
 u32    GetL(u32 K);
-
+u32    GetLPrim(u32 K);
 #endif

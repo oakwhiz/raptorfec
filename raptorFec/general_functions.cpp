@@ -20,6 +20,32 @@
 #include <limits.h>
 #include <math.h>
 
+u32 NonZeroBits(u32 num)
+{
+	int count = 0;
+	for (int i = 0 ; i < 32; ++i)
+	{
+		if ((num & 0x01) != 0)
+		{
+			count++;
+		}
+		num >>= 1;		
+		if (num == 0) break;
+	}
+	return count;
+}
+
+bool IsBitSet(u32 num, u32 pos)
+{
+	num >>= pos;
+	if ((num & 0x01) != 0)
+	{
+		return true;
+	}else{
+		return false;
+	}
+}
+
 double Fact(u32 n)
 {
     if (n == 0) return 1.0;
@@ -54,38 +80,61 @@ bool IsPrime(u32 num)
 }
 
 /* See RFC 5053:5.4.2.3*/
-u32 GetL(u32 K)
+u32 GetX(u32 K)
 {
-	u32 X,S,H;
-	/* See RFC 5053:5.4.2.3 */
+    u32 X;
 	// Get X value
 	for (X = 0; X < UINT_MAX; ++X)
 	{
 		if (X*(X-1) >= 2*K)
 		{
-			DBG("CTripeGenerator::New X = %d\n",X);
 			break;
 		}
 	}
+	return X;
+}
+
+u32 GetS(u32 K)
+{
+    u32 X,S;
+	X = GetX(K);
 	//Get S value
 	for (S = 0; S < UINT_MAX; ++S)
 	{
 		if ((S >= ceil(0.01*(double)K) + X) && IsPrime(S))
 		{
-			DBG("CTripeGenerator::New S = %d\n",S);
 			break;
 		}
 	}
+	return S;
+}
+
+u32 GetH(u32 K, u32 S)
+{
+	u32 H;
 	//Get H value
 	for (H = 0; H < UINT_MAX; ++H)
 	{
 		if (Comb(H,(long)ceil((double)H/2.0)) >= K + S)
 		{
-			DBG("CTripeGenerator::New H = %d\n",H);
 			break;
 		}
 	}
-	u32 L = K+S+H;
+	return H;
+}
+
+u32 GetL(u32 K)
+{
+	u32 S,H;
+	S = GetS(K);	
+	H = GetH(K,S);
+	u32 L = K+S+H;	
+	return L;
+}
+
+u32 GetLPrim(u32 K)
+{
+	u32 L = GetL(K);
 	while(!IsPrime(L))
 	{
 		L++;
