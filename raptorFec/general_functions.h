@@ -35,6 +35,7 @@ u32    Deg(u32 v);
 u32    GetX(u32 K);
 u32    GetS(u32 K);
 u32    GetH(u32 K, u32 S);
+u32    GetHp(u32 H);
 u32    GetL(u32 K);
 u32    GetLPrim(u32 K);
 #endif

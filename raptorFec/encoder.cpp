@@ -1,3 +1,18 @@
+/**
+ * encoder.cpp Copyright (C) 2009 Vicente Sirvent.
+ * 
+ * This library is free software; you can redistribute it and/or modify it 
+ * under the terms of the GNU Lesser General Public License as published by 
+ * the Free Software Foundation; either version 2.1 of the License, or (at your option) 
+ * any later version.
+ * This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+ * See the GNU Lesser General Public License for more details.
+ * You should have received a copy of the GNU Lesser General Public License along with this library; 
+ * if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ * 
+ * Contact mail : vicentesirvent@hotmail.com
+ */
 
 #include "encoder.h"
 #include "general_functions.h"
@@ -8,14 +23,14 @@ CEncoder::CEncoder(u32 K)
 	m_K = K;
 	m_S = GetS(K);
 	m_H = GetH(K,m_S);
-	m_Hp = (u32)ceil((double)m_H/2.0);
+	m_Hp = GetHp(m_H);
 	m_L = GetL(K);
 	m_Lp = GetLPrim(K);
 	m_Count = 0;
 	//Load triples
-	m_Triples = new CTriple[m_K];
+	m_Triples = new CTriple[m_L];
 	CTripleGenerator triple_gen;
-	for (u32 x = 0; x < m_K; ++x)
+	for (u32 x = 0; x < m_L; ++x)
 	{
 		m_Triples[x] = triple_gen.Trip(m_K,x);
 	}
@@ -115,7 +130,7 @@ CEncoder::AddData(CData * source)
 		}		
 
 		//Get repair symbols
-		queue<CData*> encoded_sym = LTEnc(m_K,m_Data,m_Triples);
+		data = LTEnc(m_K,m_Data,m_Triples);
 	}
 	return data;
 }

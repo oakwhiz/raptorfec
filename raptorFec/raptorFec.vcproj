@@ -180,6 +180,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\decoder.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\encoder.cpp"
 				>
 			</File>
@@ -203,6 +207,10 @@
 			>
 			<File
 				RelativePath=".\data.h"
+				>
+			</File>
+			<File
+				RelativePath=".\decoder.h"
 				>
 			</File>
 			<File

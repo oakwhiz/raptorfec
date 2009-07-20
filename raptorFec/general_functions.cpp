@@ -123,6 +123,11 @@ u32 GetH(u32 K, u32 S)
 	return H;
 }
 
+u32 GetHp(u32 H)
+{
+	return (u32)ceil((double)H/2.0);
+}
+
 u32 GetL(u32 K)
 {
 	u32 S,H;
